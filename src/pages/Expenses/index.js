@@ -33,16 +33,26 @@ const Expenses = () => {
       ToastAndroid.CENTER
     );
   };
-  
+
+  const toastMensage = (mensage) => {
+    ToastAndroid.showWithGravity(
+      mensage,
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+  };
+
   function handleSubmit() {
     if (name === "" || value === "") {
-      toastError()
+      toastError();
     } else if (!expenseSelected) {
       addExpenses(name, value);
+      toastMensage("Expense Add");
       setName("");
       setValue("");
     } else {
       updateExpenses(expenseSelected.id, name, value);
+      toastMensage("Expense Updated");
       setName("");
       setValue("");
     }
@@ -76,7 +86,9 @@ const Expenses = () => {
           onChangeText={setValue}
         />
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>{expenseSelected ? 'Edit' : 'Add'}</Text>
+          <Text style={styles.buttonText}>
+            {expenseSelected ? "Edit" : "Add"}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -95,7 +107,12 @@ const Expenses = () => {
               >
                 <IconM1 name="edit" size={18} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => deleteExpenses(expenses.id)}>
+              <TouchableOpacity
+                onPress={() => {
+                  deleteExpenses(expenses.id);
+                  toastMensage("Expense Deleted");
+                }}
+              >
                 <IconM2 name="trash-can" size={18} />
               </TouchableOpacity>
             </View>

@@ -24,10 +24,10 @@ const Incomes = () => {
     findIncome,
     incomeSelected,
     updateIncome,
-    totalIncome
+    totalIncome,
   } = useContext(GlobalContext);
   const [name, setName] = useState("");
-  const [value, setValue] = useState("");  
+  const [value, setValue] = useState("");
 
   const toastError = () => {
     ToastAndroid.showWithGravity(
@@ -37,15 +37,25 @@ const Incomes = () => {
     );
   };
 
+  const toastMensage = (mensage) => {
+    ToastAndroid.showWithGravity(
+      mensage,
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+  };
+
   function handleSubmit() {
     if (name === "" || value === "") {
-      toastError()
+      toastError();
     } else if (!incomeSelected) {
       addIncomes(name, value);
+      toastMensage("Income Add");
       setName("");
       setValue("");
     } else {
       updateIncome(incomeSelected.id, name, value);
+      toastMensage("Income Updated");
       setName("");
       setValue("");
     }
@@ -100,7 +110,12 @@ const Incomes = () => {
               >
                 <IconM1 name="edit" size={18} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => deleteIncome(incomes.id)}>
+              <TouchableOpacity
+                onPress={() => {
+                  deleteIncome(incomes.id);
+                  toastMensage("Deleted Income");
+                }}
+              >
                 <IconM2 name="trash-can" size={18} />
               </TouchableOpacity>
             </View>
