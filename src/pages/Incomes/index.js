@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
+  ToastAndroid,
 } from "react-native";
 import AppBar from "../../components/AppBar";
 import { GlobalContext } from "../../context/GlobalContext";
@@ -28,9 +29,17 @@ const Incomes = () => {
   const [name, setName] = useState("");
   const [value, setValue] = useState("");  
 
+  const toastError = () => {
+    ToastAndroid.showWithGravity(
+      "Empty name or value, please fill them",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+  };
+
   function handleSubmit() {
     if (name === "" || value === "") {
-      alert("Error");
+      toastError()
     } else if (!incomeSelected) {
       addIncomes(name, value);
       setName("");
