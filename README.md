@@ -1,5 +1,5 @@
 
-![](https://i.ibb.co/ky7F0tp/my.gif)
+<a href="https://ibb.co/j5NFGSd"><img src="https://i.ibb.co/j5NFGSd/my.gif" alt="my" border="0"></a>
 # Sobre
 - Projeto do modulo multi-plataforma Pós Graduação da Unipe.
 - React-Native
