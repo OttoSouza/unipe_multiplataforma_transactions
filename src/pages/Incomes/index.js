@@ -95,33 +95,41 @@ const Incomes = () => {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        data={incomes}
-        keyExtractor={(incomes) => String(incomes.id)}
-        renderItem={({ item: incomes }) => (
-          <View style={styles.incomeContainer}>
-            <Text style={styles.incomeText}>{incomes.name}</Text>
-            <Text style={styles.incomeText}>R$ {incomes.value}</Text>
+      <Text style={styles.titleList}>Your Incomes</Text>
 
-            <View style={styles.iconsContainer}>
-              <TouchableOpacity
-                style={styles.iconSpace}
-                onPress={() => findIncome(incomes.id)}
-              >
-                <IconM1 name="edit" size={18} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  deleteIncome(incomes.id);
-                  toastMensage("Deleted Income");
-                }}
-              >
-                <IconM2 name="trash-can" size={18} />
-              </TouchableOpacity>
+      {incomes.length ? (
+        <FlatList
+          data={incomes}
+          keyExtractor={(incomes) => String(incomes.id)}
+          renderItem={({ item: incomes }) => (
+            <View style={styles.incomeContainer}>
+              <Text style={styles.incomeText}>{incomes.name}</Text>
+              <Text style={styles.incomeText}>R$ {incomes.value}</Text>
+
+              <View style={styles.iconsContainer}>
+                <TouchableOpacity
+                  style={styles.iconSpace}
+                  onPress={() => findIncome(incomes.id)}
+                >
+                  <IconM1 name="edit" size={18} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    deleteIncome(incomes.id);
+                    toastMensage("Deleted Income");
+                  }}
+                >
+                  <IconM2 name="trash-can" size={18} />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        )}
-      />
+          )}
+        />
+      ) : (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>Empyt</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -155,13 +163,13 @@ const styles = StyleSheet.create({
   incomeContainer: {
     flex: 1,
     backgroundColor: "#fff",
-    marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 14,
     height: 50,
     alignItems: "center",
     borderRadius: 20,
+    marginBottom: 10
   },
   incomeText: {
     color: "#000",
@@ -173,4 +181,28 @@ const styles = StyleSheet.create({
   iconSpace: {
     marginRight: 12,
   },
+
+  titleList: {
+    color: "#B83A2E",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+    borderBottomColor: "white",
+    borderBottomWidth: 2,
+    width: "90%",
+    alignSelf: "center",
+  },
+  emptyContainer : {
+    width: '100%',
+    height: 50,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+
+  },
+  emptyText: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  }
 });

@@ -92,33 +92,40 @@ const Expenses = () => {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        data={expenses}
-        keyExtractor={(expenses) => String(expenses.id)}
-        renderItem={({ item: expenses }) => (
-          <View style={styles.expensesContainer}>
-            <Text style={styles.expenseText}>{expenses.name}</Text>
-            <Text style={styles.expenseText}>R$ {expenses.value}</Text>
+      <Text style={styles.titleList}>Your Expenses</Text>
 
-            <View style={styles.iconsContainer}>
-              <TouchableOpacity
-                style={styles.iconSpace}
-                onPress={() => findExpense(expenses.id)}
-              >
-                <IconM1 name="edit" size={18} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  deleteExpenses(expenses.id);
-                  toastMensage("Expense Deleted");
-                }}
-              >
-                <IconM2 name="trash-can" size={18} />
-              </TouchableOpacity>
+      {expenses.length ? (
+        <FlatList
+          data={expenses}
+          keyExtractor={(expenses) => String(expenses.id)}
+          renderItem={({ item: expenses }) => (
+            <View style={styles.expensesContainer}>
+              <Text style={styles.expenseText}>{expenses.name}</Text>
+              <Text style={styles.expenseText}>R$ {expenses.value}</Text>
+              <View style={styles.iconsContainer}>
+                <TouchableOpacity
+                  style={styles.iconSpace}
+                  onPress={() => findExpense(expenses.id)}
+                >
+                  <IconM1 name="edit" size={18} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    deleteExpenses(expenses.id);
+                    toastMensage("Expense Deleted");
+                  }}
+                >
+                  <IconM2 name="trash-can" size={18} />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        )}
-      />
+          )}
+        />
+      ) : (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>empty</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -153,14 +160,25 @@ const styles = StyleSheet.create({
   expensesContainer: {
     flex: 1,
     backgroundColor: "#fff",
-    marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 14,
     height: 50,
     alignItems: "center",
     borderRadius: 20,
+    marginBottom: 10
   },
+  titleList: {
+    color: "#618F74",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+    borderBottomColor: "white",
+    borderBottomWidth: 2,
+    width: "90%",
+    alignSelf: "center",
+  },
+
   expenseText: {
     color: "#000",
     fontSize: 16,
@@ -170,5 +188,17 @@ const styles = StyleSheet.create({
   },
   iconSpace: {
     marginRight: 12,
+  },
+  emptyContainer: {
+    width: "100%",
+    height: 50,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+  },
+  emptyText: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
