@@ -123,7 +123,7 @@ const Expenses = () => {
         />
       ) : (
         <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>empty</Text>
+          <Text style={styles.emptyText}>Empty</Text>
         </View>
       )}
     </View>
@@ -162,17 +162,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 14,
+    paddingHorizontal: 12,
+    marginHorizontal: 12,
     height: 50,
     alignItems: "center",
-    borderRadius: 20,
-    marginBottom: 10
+    borderRadius: 12,
+    marginBottom: 12,
   },
   titleList: {
     color: "#618F74",
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: 12,
     borderBottomColor: "white",
     borderBottomWidth: 2,
     width: "90%",
@@ -190,15 +191,15 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   emptyContainer: {
-    width: "100%",
     height: 50,
-    borderRadius: 20,
+    borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
+    marginHorizontal: 12,
   },
   emptyText: {
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: "bold",
   },
 });
